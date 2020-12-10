@@ -2,6 +2,7 @@ const mongoose=require('mongoose');
 
 
 const postSchema= new mongoose.Schema({
+    
     author:{
         type:String,
         required:true
@@ -16,6 +17,12 @@ const postSchema= new mongoose.Schema({
     },
     date:{
         type:String
+    },
+    upvotes:{
+        type:Number
+    },
+    downvotes:{
+        type:Number
     }
 })
 

@@ -3,6 +3,7 @@ const User = require("../models/user");
 const bcrypt=require('bcrypt');
 
 
+// route for getting all the signup information
 userRouter.get('/',(request,response,next)=>{
 
     User.find({}).then(result=>{
@@ -11,6 +12,7 @@ userRouter.get('/',(request,response,next)=>{
     })
 })
 
+// route for signing up
 userRouter.post('/signup',async(request,response) =>{
     const{firstName,lastName,email,password}=request.body;
     
@@ -39,6 +41,8 @@ userRouter.post('/signup',async(request,response) =>{
 })
 
 
+
+// route for logging in
 userRouter.post('/login',async(request,response) =>{
     try{
         const user=await user.findOne({email:request.body.email});

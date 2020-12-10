@@ -7,11 +7,13 @@ const http=require('http')
 const Port=process.env.port
 const server=http.createServer(app)
 const userRouter=require('./controllers/owner')
+const postRouter=require('./controllers/blog')
 
 
 const config={
     useNewUrlParser:true,
-    useUnifiedTopology:true
+    useUnifiedTopology:true,
+    useCreateIndex:true
 }
 
 app.use(cors());
@@ -27,7 +29,8 @@ mongoose.connect(process.env.MONGODB_URI,config)
     console.log("A problem occurred",err)
 })
 
-app.use(userRouter)
+app.use('/user',userRouter);
+app.use('/post',postRouter);
 
 server.listen(Port, () =>{
     console.log("Express server is working")
