@@ -24,7 +24,7 @@ postRouter.post('/',async(request,response,next) =>{
             author:author,
             title:title,
             content:content,
-            date:Date.now(),
+            date:Date(),
             upvotes:0,
             downvotes:0
         })
