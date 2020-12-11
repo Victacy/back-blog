@@ -4,8 +4,10 @@ const mongoose=require('mongoose')
 const app=express()
 const cors=require('cors')
 const http=require('http')
+
 const Port=process.env.port
 const server=http.createServer(app)
+
 const userRouter=require('./controllers/owner')
 const postRouter=require('./controllers/blog')
 
@@ -31,6 +33,7 @@ mongoose.connect(process.env.MONGODB_URI,config)
 
 app.use('/user',userRouter);
 app.use('/post',postRouter);
+
 
 server.listen(Port, () =>{
     console.log("Express server is working")

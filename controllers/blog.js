@@ -1,4 +1,5 @@
 const postRouter=require('express').Router();
+const { response } = require('express');
 const mongoose=require('mongoose');
 const post=require('../models/post');
 
@@ -14,13 +15,15 @@ postRouter.get('/',(request,response,next) => {
 
 // route for creating a new post
 postRouter.post('/',async(request,response,next) =>{
-    const {author,title,content} =request.body;
-    const blogCount=await post.countDocuments();
+    const {author,title,content,date} =request.body;
+    
 
     if(author && title && content){
+        const blogCount=await post.countDocuments();
        
 
         const newPost=new post({
+            // id:blogCount+1,
             author:author,
             title:title,
             content:content,
@@ -50,8 +53,41 @@ postRouter.post('/',async(request,response,next) =>{
 
 
 // route to get all posts by a specific author
-// postRouter.get('/author/:author',async(req,res) =>{
-//     res.send(res.params)
-// })
+    postRouter.get('/:author',async(req,res) =>{
+        const auth=request.params.author
+        post.find({author:author})
+        .then((res) =>{
+            res.status(200).send(res)
+            next()
+        })
+    })
+
+
+
+    // route to get a post based on a parameter
+    postRouter.get('/',(req,res,next) =>{
+
+    })
+
+    // route to update a post(content &number of votes)
+    postRouter.put('/:id',(req,res,next) =>{
+
+    })
+
+    // route to delete a post
+    postRouter.delete('/:id',(req,res,next) =>{
+        deleteId=req.params.id
+        post.findOneAndDelete({id:deleteId})
+        .then((res) =>{
+            res.status(200)
+            next()
+        }).catch((err) =>
+        console.log(err))
+    })
+
+    postRouter.patch('/:id',(req,res,next) =>{
+
+    })
+
 
 module.exports=postRouter;

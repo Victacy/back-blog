@@ -2,6 +2,10 @@ const mongoose=require('mongoose');
 
 
 const postSchema= new mongoose.Schema({
+    // id:{
+    //     type:Number,
+    //     required:true
+    // },
     
     author:{
         type:String,
@@ -16,7 +20,8 @@ const postSchema= new mongoose.Schema({
         required:true
     },
     date:{
-        type:String
+        type:Date,
+        default:Date.now
     },
     upvotes:{
         type:Number
